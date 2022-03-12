@@ -19,6 +19,7 @@
   "homepage": "https://github.com/alimbolar/youandeyeawards-nodeserver#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "mongoose": "^6.2.6",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2"
   }

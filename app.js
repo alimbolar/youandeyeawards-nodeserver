@@ -4,6 +4,10 @@ const app = express();
 // const viewRouter = require("./routers/viewRouter");
 const apiRouter = require("./routers/apiRouter");
 
+// Body parser, reading data from body into req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
