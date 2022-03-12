@@ -1,0 +1,62 @@
+:root {
+  // GLOBAL COLOURS
+  --primary-color: hsla(10, 100%, 50%, 1);
+  --secondary-color: hsla(20, 100%, 50%, 1);
+  --accent-color: hsla(30, 100%, 50%, 1);
+
+  // STANDARD COLOURS
+  --white: hsla(1, 100%, 100%, 1);
+  --light-grey: hsla(1, 100%, 0%, 0.2);
+
+  // GLOBAL FONTS
+  --font-family: Courier, sans-serif;
+  --heading: 20px Courier, sans-serif;
+
+  // GLOBAL MEASURES
+  --font-size: 16px;
+  --header-height: 6rem;
+  --mobile-breakpoint: 720px;
+  --logo-width: calc(var(--header-height) - 1rem);
+  --menu-width: calc((var(--header-height) - 1rem));
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  // padding-top: var(--header-height);
+  width: 100%;
+  max-width: 1200px;
+  // display: block;
+  margin: auto;
+  background-color: var(--light-grey);
+}
+
+img {
+  max-width: 100%;
+  height: 100%;
+  transition: all 1s;
+}
+
+button {
+  font-size: 0.8rem;
+  width: max-content;
+  padding: 0.5em;
+}
+
+input,
+textarea {
+  outline: none;
+  resize: none;
+}

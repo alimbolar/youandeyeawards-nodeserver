@@ -1,0 +1,25 @@
+{
+  "name": "youandeyeawards-nodeserver",
+  "version": "1.0.0",
+  "description": "Server Application for APIs for youandeyeawards frontend application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alimbolar/youandeyeawards-nodeserver.git"
+  },
+  "author": "Alim Bolar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alimbolar/youandeyeawards-nodeserver/issues"
+  },
+  "homepage": "https://github.com/alimbolar/youandeyeawards-nodeserver#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "pug": "^3.0.2"
+  }
+}

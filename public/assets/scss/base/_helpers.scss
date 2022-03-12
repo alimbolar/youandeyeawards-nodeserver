@@ -1,0 +1,15 @@
+.hidden {
+  display: none;
+}
+
+.invisible {
+  //   opacity: 0;
+  transform: scale(0);
+  //   transform: translatex(200%);
+}
+
+.visible {
+  //   opacity: 1;
+  transform: scale(1);
+  //   transform: translatex(0%);
+}

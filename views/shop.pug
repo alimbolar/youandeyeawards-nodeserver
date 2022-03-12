@@ -1,0 +1,52 @@
+extends includes/layout.pug
+
+block slider 
+    include includes/slider/slider
+
+    section#cards.cards
+        //- article.card
+        //-     div.card__header
+        //-         picture#card__product
+        //-             img(src="http://unsplash.it/300/200" alt="" srcset="")
+          
+        //-     div.card__body
+        //-         p.card__product-name Product Name
+        //-         p.card__brand Brand Name
+        //-         p.card__description Some description about the products
+        
+        //-     div.card__footer
+        //-         span.card__price $1200/-
+        //-         button Buy
+        script console.log(products)
+        for product in products
+            
+            article.card
+                div.card__header
+                    picture#card__product
+                        img(src=`${product.images[3].src}` alt="" srcset="")
+            
+                div.card__body
+                    
+                    p.card__product-name=product.name 
+                    p.card__brand R Kumar Opticians
+                    p.card__description=product.description
+            
+                div.card__footer
+                    span.card__price=`${product.prices.currency_symbol} ${product.prices.price}`
+                    button Buy 
+
+
+    template
+        article.card
+            div.card__header
+                picture#card__product
+                    img(src="http://unsplash.it/300/200" alt="" srcset="")
+          
+            div.card__body
+                p.card__product-name 
+                p.card__brand 
+                p.card__description 
+        
+            div.card__footer
+                span.card__price 
+                button Buy

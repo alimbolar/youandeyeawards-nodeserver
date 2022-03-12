@@ -1,0 +1,16 @@
+footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: fr 1fr;
+  padding: 1rem;
+  gap: 2em;
+  background: var(--white);
+  border-top: 1px solid var(--light-grey);
+
+  > * {
+    display: grid;
+    // grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+    gap: 4em;
+  }
+}

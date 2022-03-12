@@ -1,0 +1,25 @@
+// BASE IMPORTS
+@import "./base/reset";
+@import "./base/base";
+@import "./base/fonts";
+@import "./base/helpers";
+@import "./base/typography";
+
+// ABSTRACTS IMPORTS
+@import "./abstracts/functions";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+
+// LAYOUTS IMPORTS
+@import "./layouts/header";
+@import "./layouts/nav";
+@import "./layouts/aside";
+@import "./layouts/main";
+@import "./layouts/footer";
+
+// COMPONENTS IMPORTS
+@import "./components/button";
+@import "./components/form";
+@import "./components/slider";
+@import "./components/social";
+@import "./components/card";

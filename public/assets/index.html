@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- GOOGLE FONTS FOR MATERIAL ICONS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/scss/style.css" />
+    <script defer src="./assets/js/main.js" type="module"></script>
+    <!-- FONTAWESOME SCRIPT -->
+    <script src="https://kit.fontawesome.com/11cec108a9.js" crossorigin="anonymous"></script>
+    <title>HTML Boiler Plate</title>
+  </head>
+  <body>
+    <header id="hotelmap_hotels_page" class="header">
+      <!-- LOGO -->
+      <figure id="logo" class="logo">
+        <picture>
+          <source
+            media="(min-width: 720px)"
+            srcset="./assets/images/logo-desktop.svg"
+          />
+          <img src="./assets/images/logo-mobile.svg" alt="" srcset="" />
+        </picture>
+      </figure>
+
+      <!-- NAVIGATION -->
+      <nav class="desktop">
+        <ul class="nav__primary">
+          <li class="nav__item"><a href="" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="mobile hidden">
+        <ul class="nav__primary">
+          <li class="nav__item"><a href="" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- MENU -->
+
+      <button class="menu">
+        <span class="menu__inner"></span>
+      </button>
+    </header>
+    <aside></aside>
+    <main>
+      <section id="slider" class="slider">
+        <article class="slide" data-slide="01">
+          <div class="photography"></div>
+        </article>
+        <article class="slide" data-slide="02">
+          <div class="technology"></div>
+        </article>
+        <article class="slide" data-slide="03">
+          <div class="content"></div>
+        </article>
+        <span class="prev material-icons">
+          chevron_left
+        </span>
+        <span class="next material-icons">
+          chevron_right
+        </span>
+      </section>
+
+      <section id="flex-hero" class="flex-hero">
+        <article>
+          <h2 class="heading">The is the flex-hero</h2>
+          <p>And this is some explanation</p>
+          <button>Click on Button</button>
+        </article>
+        <figure>
+          <picture
+            ><img src="https://unsplash.it/600/400" alt="" srcset=""
+          /></picture>
+        </figure>
+      </section>
+
+      <section id="cards" class="cards">
+        <article class="card">
+          <div class="card__header">
+          <picture class="card__product">
+            <img src="http://unsplash.it/300/200" alt="" srcset="" />
+          </picture>
+        </div>
+        <div class="card__body">
+          <p class="card__product-name">Product Name</p>
+          <p class="card__brand">Brand Name</p>
+          <p class="card__description">Some description about the products</p>
+        </div>
+        <div class="card__footer">
+          <span class="card__price">$1200/-</span>
+          <span>
+            <button>Buy</button>
+          </span>
+            
+        </div>
+        </article>
+
+
+
+      </section>
+      <section id="grid-hero" class="grid-hero">
+        <figure>
+          <picture>
+            <img src="https://unsplash.it/600/400" alt="" srcset="" />
+          </picture>
+          <figcaption>Some text about the image</figcaption>
+        </figure>
+        <article>
+          <h2 class="heading">This is the title</h2>
+          <p>And this is some explanation</p>
+          <a href="">
+            <button class="cta"><span class="cta__inner">Know More</span></button>
+          </a>
+        </article>
+      </section>
+      <section class="contact">
+        <article class="form-container">
+          <form action="/" class="form">
+            <div class="form-group">
+              <label for="name">Name : </label>
+              <input id="name" type="text" name="name" required/>
+            </div class="form-group">
+
+            <div class="form-group">
+              <label for="email">Email :</label>
+              <input type="email" name="email" id="email" required/>
+            </div class="form-group">
+
+            <div class="form-group">
+              <label for="message">Messsage : </label>
+              <textarea
+                name="message"
+                id="message"
+                cols="30"
+                rows="10"
+              required></textarea>
+            </div class="form-group">
+            <div class="form-group">
+              <label for="submit"></label>
+              
+              <div class="div"><input id="message-submit" type="submit" value="Send Message"></div>
+              <!-- <button name="submit" type="submit">Send Message</button> -->
+            </div>
+          </form>
+        </article>
+        <article>
+          <div class="social instagram">Instagram Feed will go here</div>
+        </article>
+      </section>
+    </main>
+    <footer class="footer">
+      
+
+      <section>
+        <nav aria-label="secondary navigation" class="nav">
+          <ul class="nav__secondary">
+            <li class="nav__item"><a href="#" class="nav__link">FAQ</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Privacy</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+          </ul>
+        </nav>
+        <article>
+          <div class="social">
+            <i class="fab fa-instagram fa-2x"></i>
+          <i class="fab fa-facebook fa-2x"></i>
+          <i class="fab fa-twitter fa-2x"></i>
+          <i class="fab fa-linkedin fa-2x"></i>
+          </div>
+        </article>
+      </section>
+    </footer>
+  </body>
+</html>

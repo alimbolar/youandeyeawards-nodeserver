@@ -1,0 +1,79 @@
+.slider {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  // transform: scale(0.3);
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // right: 0;
+    width: 100%;
+    height: auto;
+    transition: transform 1s;
+  }
+
+  .prev,
+  .next {
+    position: absolute;
+    z-index: 100;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 1s, transform 1s;
+  }
+
+  .prev:hover,
+  .next:hover {
+    background-color: yellowgreen;
+    transform: scale(2) rotate(360deg);
+  }
+  .prev {
+    background-color: var(--primary-color);
+    top: 50%;
+    left: 2%;
+  }
+  .next {
+    background-color: var(--primary-color);
+    top: 50%;
+    right: 2%;
+  }
+}
+
+.photography {
+  background-image: url("https://unsplash.it/1001/400");
+  //   width: 100%;
+  //   width: 33.33%;
+  background-color: yellowgreen;
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.technology {
+  //   width: 33.33%;
+
+  background-image: url("https://unsplash.it/1002/400");
+  background-color: var(--light-grey);
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.content {
+  //   width: 33.33%;
+
+  background-image: url("https://unsplash.it/1003/400");
+  background-color: pink;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

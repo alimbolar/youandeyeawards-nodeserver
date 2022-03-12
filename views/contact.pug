@@ -1,0 +1,27 @@
+extends includes/layout.pug
+
+block contact
+    section.contact
+        article.form-container
+            form(action="/api/message" class="form")
+                div.form-group
+                    label(for="name") Name
+                    input#name(type="text" name="name" required)
+                
+
+                div.form-group
+                    label(for="email") Email
+                    input#email(type="email" name="email" required)
+    
+                div.form-group
+                    label(for="message") Messsage
+                    textarea#message(name="message" cols="30" rows="10" required)
+    
+                div.form-group
+                label(for="submit")
+                div: input#message-submit(type="submit" value="Send Message")
+
+        article: div.social instagram Instagram Feed will go here
+
+
+
