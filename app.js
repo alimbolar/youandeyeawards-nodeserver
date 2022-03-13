@@ -7,10 +7,10 @@ const apiRouter = require("./routers/apiRouter");
 const app = express();
 
 // Implement CORS
-app.use(
-  cors({
-    origin: "https://optician.youandeyeawards.com/",
-  })
+// app.use(
+//   cors({
+//     origin: "https://optician.youandeyeawards.com/",
+//   })
 );
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
@@ -22,14 +22,17 @@ app.use(
 // app.options('/api/v1/tours/:id', cors());
 
 // // Add Access Control Allow Origin headers (https://www.freecodecamp.org/news/access-control-allow-origin-header-explained/)
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://optician.youandeyeawards.com/"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 // Body parser, reading data from body into req.body
 app.use(express.json());
