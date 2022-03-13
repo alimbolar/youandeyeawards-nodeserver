@@ -9,7 +9,7 @@ const app = express();
 // Implement CORS
 app.use(
   cors({
-    origin: "*",
+    origin: "https://optician.youandeyeawards.com/",
   })
 );
 // Access-Control-Allow-Origin *
