@@ -17,6 +17,13 @@ const opticianRatingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Optician Name is required"],
   },
+  slug: {
+    type: String,
+    required: [true, "Slug is required"],
+  },
+  opticianId: {
+    type: String,
+  },
   address: {
     type: String,
     required: [true, "Head Office Address is required"],
@@ -31,21 +38,33 @@ const opticianRatingSchema = new mongoose.Schema({
   segment: {
     type: String,
   },
-  slug: {
-    type: String,
-    required: [true, "Slug is required"],
+
+  ec: {
+    type: Number,
+    required: [true, "Eyewear Collection Ratings are required"],
   },
-  opticianId: {
-    type: String,
+  sq: {
+    type: Number,
+    required: [true, "Service Quality Ratings are required"],
   },
-  rating: {
-    type: Object,
-    required: [true, "Ratings are required"],
+  ce: {
+    type: Number,
+    required: [true, "Clinical Expertise Ratings are required"],
+  },
+  os: {
+    type: Number,
+    required: [true, "Overall Satisfaction Ratings are required"],
   },
 });
 
 // const opticianRatingSchema = new mongoose.Schema({
 //   fullName: String,
+//   email: String,
+//   phone: String,
+//   ec: Number,
+//   sq: Number,
+//   ce: Number,
+//   os: Number,
 // });
 
 const OpticianRating = mongoose.model("OpticianRating", opticianRatingSchema);
