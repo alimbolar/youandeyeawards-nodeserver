@@ -55,6 +55,10 @@ const opticianRatingSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Overall Satisfaction Ratings are required"],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // const opticianRatingSchema = new mongoose.Schema({
