@@ -41,6 +41,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // });
 
 // app.use("/", viewRouter);
+app.use("/", function (req, res) {
+  res.send("This is the server for youandeyeawards");
+});
+
 app.use("/api/v1", apiRouter);
 
 module.exports = app;
