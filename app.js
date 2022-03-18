@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-// const viewRouter = require("./routers/viewRouter");
 const apiRouter = require("./routers/apiRouter");
 
 const app = express();
@@ -31,23 +30,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.set("views", "./views");
-app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
-
-// app.get("/", (req, res) => {
-//   //   res.send("Hello World");
-//   res.render("index");
-// });
-
-// app.use("/", viewRouter);
-// app.use("/", function (req, res) {
-//   res.send("This is the server for youandeyeawards");
-// });
 
 app.use("/api/v1", apiRouter);
 
-// app.use("/", viewRouter);
 app.use("/", function (req, res) {
   res.send("This is the server for youandeyeawards");
 });
