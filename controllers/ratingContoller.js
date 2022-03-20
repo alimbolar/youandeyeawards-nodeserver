@@ -1,5 +1,5 @@
 const ratingController = {};
-const OpticianRating = require("../models/opticianRatingModel");
+const Rating = require("../models/ratingModel");
 
 ratingController.opticianRating = function (req, res) {
   res.send("Hello World");
@@ -7,7 +7,7 @@ ratingController.opticianRating = function (req, res) {
 
 ratingController.addOpticianRating = async function (req, res) {
   console.log(req.body);
-  const rating = await OpticianRating.create(req.body);
+  const rating = await Rating.create(req.body);
   // const rating = new OpticianRating(req.body);
   // await rating.save();
 

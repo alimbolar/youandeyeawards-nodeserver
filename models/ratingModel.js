@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const opticianRatingSchema = new mongoose.Schema({
+const ratingSchema = new mongoose.Schema({
   fullName: {
     type: String,
     required: [true, "Name is required"],
@@ -71,6 +71,6 @@ const opticianRatingSchema = new mongoose.Schema({
 //   os: Number,
 // });
 
-const OpticianRating = mongoose.model("OpticianRating", opticianRatingSchema);
+const Rating = mongoose.model("Rating", ratingSchema);
 
-module.exports = OpticianRating;
+module.exports = Rating;
