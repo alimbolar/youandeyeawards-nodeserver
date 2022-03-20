@@ -5,29 +5,37 @@ const fetch = require("node-fetch");
 // FUNCTION TO ADD ALL OPTICIANS BEFORE GO LIVE
 
 opticianController.addAllOpticians = async function (req, res) {
-  const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=100&page=`;
+  try {
+    const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=100&page=`;
 
-  let page = "1";
-  let status = true;
+    let page = "1";
+    let status = true;
 
-  while (status === true) {
-    // while (page <= 1) {
-    let newURL = url + page;
-    console.log(newURL);
-    const response = await fetch(newURL);
-    const data = await response.json();
+    while (status === true) {
+      // while (page <= 1) {
+      let newURL = url + page;
+      console.log(newURL);
+      const response = await fetch(newURL);
+      const data = await response.json();
 
-    if (response.status === 200) {
-      createOpticiansInMongo(data);
-      page++;
-    } else {
-      status = false;
+      if (response.status === 200) {
+        createOpticiansInMongo(data);
+        page++;
+      } else {
+        status = false;
+      }
     }
-  }
 
-  res.status(200).json({
-    status: "success",
-  });
+    res.status(200).json({
+      status: "success",
+      data: "Opticians Added To Mongo DB",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      data: error.message,
+    });
+  }
 };
 
 // GET ALL OPTICIANS (PENDING : SORT AND FILTER)
@@ -47,15 +55,10 @@ opticianController.getAllOpticians = async function (req, res) {
 
     let query = Optician.find(JSON.parse(queryStr));
 
-    console.log(queryObj);
-    console.log(JSON.parse(queryStr));
-    // console.log("query", query);
-
     // SORTING
 
     if (req.query.sort) {
       const sortBy = req.query.sort.split(",").join(" ");
-      console.log(sortBy);
       query = query.sort(sortBy);
     } else {
       query = query.sort("name");
