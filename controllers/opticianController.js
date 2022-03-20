@@ -2,7 +2,9 @@ const opticianController = {};
 const Optician = require("../models/opticianModel");
 const fetch = require("node-fetch");
 
-opticianController.addOptician = async function (req, res) {
+// FUNCTION TO ADD ALL OPTICIANS BEFORE GO LIVE
+
+opticianController.addAllOpticians = async function (req, res) {
   const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=100&page=`;
 
   let page = "1";
@@ -28,6 +30,8 @@ opticianController.addOptician = async function (req, res) {
   });
 };
 
+// GET ALL OPTICIANS (PENDING : SORT AND FILTER)
+
 opticianController.getAllOpticians = async function (req, res) {
   const opticians = await Optician.find();
 
@@ -37,10 +41,22 @@ opticianController.getAllOpticians = async function (req, res) {
   });
 };
 
+// CREATE ONE OPTICIAN
+
+opticianController.createOneOptician = async function (req, res) {
+  const optician = await Optician.create(req.body);
+
+  res.status(200).json({
+    status: "success",
+    data: optician,
+  });
+};
+
+// GET ONE OPTICIAN (PENDING FILTER)
+
 opticianController.getOneOptician = async function (req, res) {
   const slug = req.params.slug;
 
-  console.log(req.params);
   const optician = await Optician.find({ slug });
 
   res.status(200).json({
@@ -48,6 +64,8 @@ opticianController.getOneOptician = async function (req, res) {
     data: optician,
   });
 };
+
+// UPDATE ONE OPTICIAN
 
 opticianController.updateOneOptician = async function (req, res) {
   const slug = req.params.slug;
@@ -58,7 +76,6 @@ opticianController.updateOneOptician = async function (req, res) {
   const data = await response.json();
 
   const optician = createOpticianObject(data[0]);
-  // console.log(optician);
 
   const updatedOptician = await Optician.findOneAndUpdate({ slug }, optician);
 
@@ -67,6 +84,8 @@ opticianController.updateOneOptician = async function (req, res) {
     data: updatedOptician,
   });
 };
+
+// FUNCTION TO CHECK IF SEGMENT IS METRO OR NON-METRO
 
 const checkForMetro = function (branch) {
   const metros = [
@@ -86,7 +105,7 @@ const checkForMetro = function (branch) {
   });
 };
 
-// FUNCTION FOR USE IN ADD OPTICIAN
+// FUNCTION FOR USE IN ADD ALL OPTICIAN BEFORE GO LIVE
 
 const createOpticiansInMongo = async function (data) {
   // const opticianObject = createObject(data);
@@ -111,12 +130,10 @@ const createOpticiansInMongo = async function (data) {
     const category =
       branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
 
-    const segment =
-      +branches.length >= 5 && branches.some(checkForMetro)
-        ? "Metro"
-        : "Non-Metro";
+    if (+branches.length <= 5) {
+      const segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
+    }
 
-    // console.log("metro", branches.some(checkForMetro));
     const yearOfIncorporation =
       item["toolset-meta"]["optician-details"]["year-of-incorporation"].raw;
 
@@ -155,6 +172,8 @@ const createOpticiansInMongo = async function (data) {
   });
 };
 
+// FUNCTION TO CREATE OPTICIAN OBJECT FROM REQ.BODY
+
 const createOpticianObject = function (item) {
   const opticianId = item.id;
   const slug = item.slug;
@@ -176,12 +195,10 @@ const createOpticianObject = function (item) {
   const category =
     branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
 
-  const segment =
-    +branches.length >= 5 && branches.some(checkForMetro)
-      ? "Metro"
-      : "Non-Metro";
+  if (+branches.length <= 5) {
+    const segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
+  }
 
-  console.log("metro", branches.some(checkForMetro));
   const yearOfIncorporation =
     item["toolset-meta"]["optician-details"]["year-of-incorporation"].raw;
 

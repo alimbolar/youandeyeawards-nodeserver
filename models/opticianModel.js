@@ -63,7 +63,37 @@ const opticianSchema = new mongoose.Schema({
   segment: {
     type: String,
   },
+  nRatings: {
+    type: Number,
+    default: 0,
+  },
+  ecAverage: {
+    type: Number,
+    default: 4.5,
+    min: [1, "Rating must be 1 or above"],
+    max: [5, "Rating must be 5 or below"],
+  },
+  sqAverage: {
+    type: Number,
+    default: 4.5,
+    min: [1, "Rating must be 1 or above"],
+    max: [5, "Rating must be 5 or below"],
+  },
+  ceAverage: {
+    type: Number,
+    default: 4.5,
+    min: [1, "Rating must be 1 or above"],
+    max: [5, "Rating must be 5 or below"],
+  },
+  osAverage: {
+    type: Number,
+    default: 4.5,
+    min: [1, "Rating must be 1 or above"],
+    max: [5, "Rating must be 5 or below"],
+  },
 });
+
+opticianSchema.index({ category: 1, segment: 1 });
 
 const Optician = mongoose.model("optician", opticianSchema);
 

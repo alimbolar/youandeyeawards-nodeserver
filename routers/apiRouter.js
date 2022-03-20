@@ -8,15 +8,16 @@ const opticianController = require("../controllers/opticianController");
 // router.get("/message", messageController.saveMessage);
 
 // ALL OPTICIANS
-
-router.get("/addOptician", opticianController.addOptician);
+//
+router.get("/addAllOpticians", opticianController.addAllOpticians);
+//
 router.get("/getAllOpticians", opticianController.getAllOpticians);
+router.post("createOneOptician", opticianController.createOneOptician);
 router.get("/getOneOptician/:slug", opticianController.getOneOptician);
 router.put("/updateOneOptician/:slug", opticianController.updateOneOptician);
 
 // RATING
-router.post("/addOpticianRating", ratingController.addOpticianRating);
-
-router.get("/opticianRating", ratingController.opticianRating);
+router.get("/getAllRatings", ratingController.getAllRatings);
+router.post("/createOneRating", ratingController.createOneRating);
 
 module.exports = router;
