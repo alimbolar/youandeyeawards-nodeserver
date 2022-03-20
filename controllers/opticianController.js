@@ -33,10 +33,38 @@ opticianController.addAllOpticians = async function (req, res) {
 // GET ALL OPTICIANS (PENDING : SORT AND FILTER)
 
 opticianController.getAllOpticians = async function (req, res) {
-  const opticians = await Optician.find();
+  const queryObj = { ...req.query };
+  const excludedFields = ["page", "limit", "sort", "fields"];
+  excludedFields.forEach((field) => delete queryObj[field]);
+
+  let queryStr = JSON.stringify(queryObj);
+
+  queryStr = queryStr.replace(
+    /b(gte)|(gt)|(lte)|(lt)b/,
+    (match) => `$${match}`
+  );
+
+  let query = Optician.find(JSON.parse(queryStr));
+
+  console.log(queryObj);
+  console.log(JSON.parse(queryStr));
+  // console.log("query", query);
+
+  // SORTING
+
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(",").join(" ");
+    console.log(sortBy);
+    query = query.sort(sortBy);
+  } else {
+    query = query.sort("name");
+  }
+
+  const opticians = await query;
 
   res.status(200).json({
     status: "success",
+    count: opticians.length,
     data: opticians,
   });
 };
