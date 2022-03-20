@@ -24,4 +24,32 @@ ratingController.createOneRating = async function (req, res) {
   });
 };
 
+ratingController.updateOneRating = async function (req, res) {
+  const id = req.params.id;
+
+  const rating = await Rating.findByIdAndUpdate(id, req.body);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      rating,
+    },
+  });
+};
+
+ratingController.deleteOneRating = async function (req, res) {
+  const id = req.params.id;
+
+  await Rating.findByIdAndDelete(id, (error, deletedRating) => {
+    if (!error) {
+      res.status(200).json({
+        status: "success",
+        data: {
+          deletedRating,
+        },
+      });
+    }
+  });
+};
+
 module.exports = ratingController;

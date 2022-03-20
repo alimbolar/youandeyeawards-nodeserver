@@ -130,8 +130,9 @@ const createOpticiansInMongo = async function (data) {
     const category =
       branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
 
+    let segment = "";
     if (+branches.length <= 5) {
-      const segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
+      segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
     }
 
     const yearOfIncorporation =
@@ -195,8 +196,9 @@ const createOpticianObject = function (item) {
   const category =
     branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
 
+  let segment = "";
   if (+branches.length <= 5) {
-    const segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
+    segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
   }
 
   const yearOfIncorporation =

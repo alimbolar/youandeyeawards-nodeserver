@@ -4,10 +4,12 @@ const opticianSchema = new mongoose.Schema({
   opticianId: {
     type: String,
     required: [true, "Optician Id is required"],
+    unique: true,
   },
   slug: {
     type: String,
     required: [true, "Slug is required"],
+    unique: true,
   },
   name: {
     type: String,
@@ -45,7 +47,7 @@ const opticianSchema = new mongoose.Schema({
   brandsStocked: {
     type: String,
   },
-  serviceOffered: {
+  servicesOffered: {
     type: String,
   },
   stores: {
