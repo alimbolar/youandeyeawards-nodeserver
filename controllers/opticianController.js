@@ -33,40 +33,70 @@ opticianController.addAllOpticians = async function (req, res) {
 // GET ALL OPTICIANS (PENDING : SORT AND FILTER)
 
 opticianController.getAllOpticians = async function (req, res) {
-  const queryObj = { ...req.query };
-  const excludedFields = ["page", "limit", "sort", "fields"];
-  excludedFields.forEach((field) => delete queryObj[field]);
+  try {
+    const queryObj = { ...req.query };
+    const excludedFields = ["page", "limit", "sort", "fields"];
+    excludedFields.forEach((field) => delete queryObj[field]);
 
-  let queryStr = JSON.stringify(queryObj);
+    let queryStr = JSON.stringify(queryObj);
 
-  queryStr = queryStr.replace(
-    /b(gte)|(gt)|(lte)|(lt)b/,
-    (match) => `$${match}`
-  );
+    queryStr = queryStr.replace(
+      /b(gte)|(gt)|(lte)|(lt)b/,
+      (match) => `$${match}`
+    );
 
-  let query = Optician.find(JSON.parse(queryStr));
+    let query = Optician.find(JSON.parse(queryStr));
 
-  console.log(queryObj);
-  console.log(JSON.parse(queryStr));
-  // console.log("query", query);
+    console.log(queryObj);
+    console.log(JSON.parse(queryStr));
+    // console.log("query", query);
 
-  // SORTING
+    // SORTING
 
-  if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
-    console.log(sortBy);
-    query = query.sort(sortBy);
-  } else {
-    query = query.sort("name");
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      console.log(sortBy);
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort("name");
+    }
+
+    // SELECT FIELDS
+
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      query = query.select(fields);
+    }
+
+    // PAGINATION
+
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 1000;
+    // Logic applied is that records from previous page (page-1) need to be skipped
+    const skip = (page - 1) * limit;
+    query = query.skip(skip).limit(limit);
+
+    const numOfRecords = await Optician.countDocuments();
+    if (req.query.page) {
+      if (skip >= numOfRecords) throw new Error("No more records");
+    }
+
+    const opticians = await query;
+
+    res.status(200).json({
+      status: "success",
+      count: opticians.length,
+      total: numOfRecords,
+      data: opticians,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      // count: opticians.length,
+      // total: numOfRecords,
+      data: error.message,
+    });
   }
-
-  const opticians = await query;
-
-  res.status(200).json({
-    status: "success",
-    count: opticians.length,
-    data: opticians,
-  });
 };
 
 // CREATE ONE OPTICIAN

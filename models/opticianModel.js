@@ -68,30 +68,35 @@ const opticianSchema = new mongoose.Schema({
   nRatings: {
     type: Number,
     default: 0,
+    select: false,
   },
   ecAverage: {
     type: Number,
     default: 4.5,
     min: [1, "Rating must be 1 or above"],
     max: [5, "Rating must be 5 or below"],
+    select: false,
   },
   sqAverage: {
     type: Number,
     default: 4.5,
     min: [1, "Rating must be 1 or above"],
     max: [5, "Rating must be 5 or below"],
+    select: false,
   },
   ceAverage: {
     type: Number,
     default: 4.5,
     min: [1, "Rating must be 1 or above"],
     max: [5, "Rating must be 5 or below"],
+    select: false,
   },
   osAverage: {
     type: Number,
     default: 4.5,
     min: [1, "Rating must be 1 or above"],
     max: [5, "Rating must be 5 or below"],
+    select: false,
   },
 });
 
