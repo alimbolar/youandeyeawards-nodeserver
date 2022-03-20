@@ -209,6 +209,8 @@ const createOpticiansInMongo = async function (data) {
       item["toolset-meta"]["optician-details"]["optician-store-image"].raw;
     const bannerImages =
       item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
+    const country =
+      item["toolset-meta"]["optician-details"]["optician-store"].raw;
     const opticianObject = {
       opticianId,
       slug,
@@ -228,6 +230,7 @@ const createOpticiansInMongo = async function (data) {
       servicesOffered,
       storeImages,
       bannerImages,
+      country,
     };
 
     Optician.create(opticianObject);
@@ -275,6 +278,8 @@ const createOpticianObject = function (item) {
     item["toolset-meta"]["optician-details"]["optician-store-image"].raw;
   const bannerImages =
     item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
+  const country =
+    item["toolset-meta"]["optician-details"]["optician-store"].raw;
   return {
     opticianId,
     slug,
@@ -294,6 +299,7 @@ const createOpticianObject = function (item) {
     servicesOffered,
     storeImages,
     bannerImages,
+    country,
   };
 };
 

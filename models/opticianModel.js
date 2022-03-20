@@ -53,6 +53,9 @@ const opticianSchema = new mongoose.Schema({
   stores: {
     type: String,
   },
+  country: {
+    type: String,
+  },
   storeImages: {
     type: Array,
   },
