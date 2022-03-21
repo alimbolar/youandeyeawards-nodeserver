@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Data sanitization against XSS
-app.use(xss());
+// app.use(xss());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -53,10 +53,16 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/api/v1", apiRouter);
+
+app.use(function (req, res, next) {
+  res.removeHeader("x-content-type-options");
+  next();
+});
+
 app.use("/admin", adminRouter);
 
-app.use("/", function (req, res) {
-  res.send("This is the server for youandeyeawards");
-});
+// app.use("/", function (req, res) {
+//   res.send("This is the server for youandeyeawards");
+// });
 
 module.exports = app;
