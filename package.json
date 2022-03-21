@@ -19,10 +19,14 @@
   "homepage": "https://github.com/alimbolar/youandeyeawards-nodeserver#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-mongo-sanitize": "^2.2.0",
     "mongoose": "^6.2.6",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "xss-clean": "^0.1.1"
   }
 }

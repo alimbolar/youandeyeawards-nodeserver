@@ -1,14 +1,19 @@
 const app = require("./app");
 const mongoose = require("mongoose");
-// const express = require("express");
-// const path = require("path");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: `${__dirname}/.env` });
+
+const DB = process.env.DATABASE.replace(
+  `{%PASSWORD%}`,
+  process.env.DATABASE_PASSWORD
+);
+
 mongoose
-  .connect(
-    "mongodb+srv://alimbolar:alimbolar@youandeyeawards.oqqc8.mongodb.net/youandeyeawards-mongodb?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-    }
-  )
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected to DB"))
   .catch((error) => console.log(error));
 
@@ -16,4 +21,11 @@ const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, function () {
   console.log(`Server is running at Port ${PORT}`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED REJECTION 💥 :", err.name, err.message);
+  console.log("STACK :", err.stack);
+  console.log("Shutting down server...");
+  server.close(() => process.exit(1));
 });
