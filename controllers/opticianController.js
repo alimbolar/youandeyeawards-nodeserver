@@ -4,22 +4,33 @@ const fetch = require("node-fetch");
 
 // FUNCTION TO ADD ALL OPTICIANS BEFORE GO LIVE
 
+// let opticianIdArray = [];
+
 opticianController.addAllOpticians = async function (req, res) {
   try {
-    const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=100&page=`;
+    // CREATE AN ARRAY OF IDS BASED ON EXISTING OPTICIANS IN DATABASE
+
+    const query = Optician.find().select("opticianId");
+    const opticianIds = await query;
+    let opticianIdsArray = opticianIds.map((optician) => optician.opticianId);
+
+    // GET JSON FROM WORDPRESS
+
+    const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=50&page=`;
 
     let page = "1";
     let status = true;
 
     while (status === true) {
-      // while (page <= 1) {
+      // while (page <= 3) {
       let newURL = url + page;
       console.log(newURL);
       const response = await fetch(newURL);
       const data = await response.json();
 
       if (response.status === 200) {
-        createOpticiansInMongo(data);
+        createOpticiansInMongo(data, opticianIdsArray);
+
         page++;
       } else {
         status = false;
@@ -28,6 +39,7 @@ opticianController.addAllOpticians = async function (req, res) {
 
     res.status(200).json({
       status: "success",
+
       data: "Opticians Added To Mongo DB",
     });
   } catch (error) {
@@ -173,8 +185,7 @@ const checkForMetro = function (branch) {
 
 // FUNCTION FOR USE IN ADD ALL OPTICIAN BEFORE GO LIVE
 
-const createOpticiansInMongo = async function (data) {
-  // const opticianObject = createObject(data);
+const createOpticiansInMongo = async function (data, opticianIdsArray) {
   data.forEach((item) => {
     const opticianId = item.id;
     const slug = item.slug;
@@ -238,7 +249,9 @@ const createOpticiansInMongo = async function (data) {
       country,
     };
 
-    Optician.create(opticianObject);
+    if (!opticianIdsArray.includes(item.id.toString())) {
+      Optician.create(opticianObject);
+    }
   });
 };
 
