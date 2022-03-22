@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/admin", adminRouter);
+app.use("/sbrawiagiwmyt", adminRouter);
 
 // app.use("/", function (req, res) {
 //   res.send("This is the server for youandeyeawards");
