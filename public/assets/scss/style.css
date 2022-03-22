@@ -225,24 +225,66 @@ figcaption {
   background-color: var(--secondary-color);
 }
 
-header.header {
+main.main {
+  width: 100%;
+  margin: auto;
   text-align: center;
   padding: 2rem;
 }
 
-header.header h1 {
+main.main h1 {
   font-size: 2rem;
   line-height: 2rem;
 }
 
-header.header p {
+main.main p {
   font-size: 1.3rem;
   line-height: 3rem;
 }
 
-main {
+main.dashboard {
+  display: -ms-grid;
+  display: grid;
   width: 100%;
-  max-width: 50rem;
+  height: 100vh;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr minmax(1fr, 8fr);
+      grid-template-rows: 1fr minmax(1fr, 8fr);
+}
+
+main.dashboard .logo img {
+  width: 400px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin: auto;
+  display: block;
+}
+
+main.dashboard .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+@media (min-width: 50rem) {
+  main.dashboard .buttons {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
 }
 
 .cards {

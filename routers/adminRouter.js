@@ -4,6 +4,8 @@ const viewController = require("../controllers/viewController");
 
 //ADMIN
 
+router.get("/", viewController.showDashboard);
+
 router.get("/:category", viewController.showResults);
 
 module.exports = router;

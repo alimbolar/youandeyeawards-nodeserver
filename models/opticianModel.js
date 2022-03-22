@@ -9,7 +9,6 @@ const opticianSchema = new mongoose.Schema({
   slug: {
     type: String,
     required: [true, "Slug is required"],
-    unique: true,
   },
   name: {
     type: String,
@@ -75,29 +74,25 @@ const opticianSchema = new mongoose.Schema({
   },
   ecAverage: {
     type: Number,
-    default: 4.5,
-    min: [1, "Rating must be 1 or above"],
+    default: 0,
     max: [5, "Rating must be 5 or below"],
     select: false,
   },
   sqAverage: {
     type: Number,
-    default: 4.5,
-    min: [1, "Rating must be 1 or above"],
+    default: 0,
     max: [5, "Rating must be 5 or below"],
     select: false,
   },
   ceAverage: {
     type: Number,
-    default: 4.5,
-    min: [1, "Rating must be 1 or above"],
+    default: 0,
     max: [5, "Rating must be 5 or below"],
     select: false,
   },
   osAverage: {
     type: Number,
-    default: 4.5,
-    min: [1, "Rating must be 1 or above"],
+    default: 0,
     max: [5, "Rating must be 5 or below"],
     select: false,
   },

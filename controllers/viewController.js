@@ -1,6 +1,10 @@
 const viewController = {};
 const Optician = require("./../models/opticianModel");
 
+viewController.showDashboard = function (req, res, next) {
+  res.status(200).render("dashboard");
+};
+
 viewController.showResults = async function (req, res, next) {
   const category = req.params.category;
   let segment;
@@ -23,7 +27,7 @@ viewController.showResults = async function (req, res, next) {
     .select(
       "opticianId logoUrl name nRatings ecAverage sqAverage ceAverage osAverage lensesDispensed brandsStocked servicesOffered stores category segment"
     )
-    .sort("-nRatings");
+    .sort("-nRatings name");
 
   const opticians = await query;
 

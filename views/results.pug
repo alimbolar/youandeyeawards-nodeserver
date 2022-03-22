@@ -7,12 +7,14 @@ block content
     //-     //- p Rating for #{optician.category} #{optician.segment}
     //-     p= `${optician.category}`
     main.main
+        h1 Welcome to YouAndEyeAwards Admin Area
+        p Voting Results for #{categorySegment} (#{count} opticians)
 
     .cards
         each optician in opticians
             .card
                 .card__logo 
-                    img(src=`${optician.logoUrl}`, alt="")
+                    img(src=`${optician.logoUrl}` alt=`logo of ${optician.name}` loading="lazy")
                 .card__title 
                     h2= `${optician.name}` 
                 .card__rating
@@ -45,7 +47,7 @@ block content
                             h4 Services Offered 
                             p= `${optician.servicesOffered}`
                     form(class="update-optician" data-optician-id=`${optician.opticianId}`) 
-                        button(type="submit") Update Optician Data On Server  
+                        button(type="submit" class="cta") Update Optician Data On Server  
                     //- .card__category 
                     //-     h4 Category 
                     //-     p= `${optician.category}`

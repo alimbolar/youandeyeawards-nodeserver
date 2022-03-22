@@ -130,19 +130,21 @@ opticianController.getOneOptician = async function (req, res) {
 
 opticianController.updateOneOptician = async function (req, res) {
   const opticianId = req.params.opticianId;
+  console.log(opticianId);
 
-  const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&id=${opticianId}`;
+  const url = `https://youandeyemag.com/wp-json/wp/v2/optician/${opticianId}/?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered`;
 
   const response = await fetch(url);
   const data = await response.json();
 
-  const optician = createOpticianObject(data[0]);
+  // console.log(data);
+  const optician = updateOpticianObject(data);
 
   const updatedOptician = await Optician.findOneAndUpdate(
     { opticianId },
     optician
   );
-
+  // console.log(updatedOptician);
   res.status(200).json({
     status: "success",
     data: updatedOptician,
@@ -240,9 +242,9 @@ const createOpticiansInMongo = async function (data) {
   });
 };
 
-// FUNCTION TO CREATE OPTICIAN OBJECT FROM REQ.BODY
+// FUNCTION TO UPDATE OPTICIAN OBJECT
 
-const createOpticianObject = function (item) {
+const updateOpticianObject = function (item) {
   const opticianId = item.id;
   const slug = item.slug;
   const name = item.title.rendered;
@@ -284,7 +286,7 @@ const createOpticianObject = function (item) {
   const country =
     item["toolset-meta"]["optician-details"]["optician-store"].raw;
   return {
-    opticianId,
+    // opticianId,
     slug,
     name,
     profile,
