@@ -15,7 +15,8 @@
   text-align: center;
 
   h2 {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
   }
   h4 {
     font-size: 0.9rem;
@@ -31,8 +32,12 @@
     grid-column: 1/2;
     grid-row: 1/2;
     overflow: hidden;
+    height: 100%;
     border-bottom: 1px solid gray;
     aspect-ratio: 2/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       object-fit: contain;
     }
@@ -55,6 +60,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr 1fr;
+
+    // border-top: 1px solid gray;
 
     &-total {
       grid-column-start: 1;

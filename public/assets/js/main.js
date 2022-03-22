@@ -25,6 +25,8 @@ updatedOpticianForm.forEach((form) => {
     // console.log(this.getAttribute("data-optician-id"));
     // console.log(this.dataset.opticianId);
 
+    this.closest(".card").style.opacity = "0.4";
+
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -33,10 +35,14 @@ updatedOpticianForm.forEach((form) => {
         if (data.status === "success") {
           console.log("optician updated");
           button.textContent = "Updated Successfully";
+          this.closest(".card").style.opacity = "1";
           this.closest(".card").style.borderColor = "green";
+          this.closest(".card").style.borderWidth = "2px";
         } else {
           button.textContent = "Could Not Update. Contact Admin";
+          this.closest(".card").style.opacity = "1";
           this.closest(".card").style.borderColor = "red";
+          this.closest(".card").style.borderWidth = "2px";
         }
       });
   });
