@@ -128,14 +128,21 @@ opticianController.createOneOptician = async function (req, res) {
 // GET ONE OPTICIAN (PENDING FILTER)
 
 opticianController.getOneOptician = async function (req, res) {
-  const slug = req.params.slug;
+  try {
+    const slug = req.params.slug;
 
-  const optician = await Optician.find({ slug });
+    const optician = await Optician.find({ slug });
 
-  res.status(200).json({
-    status: "success",
-    data: optician,
-  });
+    res.status(200).json({
+      status: "success",
+      data: optician,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
 };
 
 // UPDATE ONE OPTICIAN
