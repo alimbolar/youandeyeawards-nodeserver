@@ -233,13 +233,13 @@ main.main {
 }
 
 main.main h1 {
-  font-size: 2rem;
-  line-height: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 
 main.main p {
-  font-size: 1.3rem;
-  line-height: 3rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 main.dashboard {
