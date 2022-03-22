@@ -297,6 +297,18 @@ main.dashboard .buttons {
   }
 }
 
+main.dashboard form.update-all-opticians {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .cards {
   display: -webkit-box;
   display: -ms-flexbox;

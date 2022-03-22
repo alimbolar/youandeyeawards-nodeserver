@@ -47,4 +47,10 @@ main.dashboard {
       flex-direction: row;
     }
   }
+
+  form.update-all-opticians {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

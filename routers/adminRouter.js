@@ -7,5 +7,6 @@ const viewController = require("../controllers/viewController");
 router.get("/", viewController.showDashboard);
 
 router.get("/results/:category", viewController.showResults);
+router.get("/update-all-opticians", viewController.showUpdateOpticians);
 
 module.exports = router;

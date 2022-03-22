@@ -1,8 +1,11 @@
-const updatedOpticianForm = document.querySelectorAll("form.update-optician");
-
+const updateOneOpticianForm = document.querySelectorAll("form.update-optician");
+const updateAllOpticiansForm = document.querySelector(
+  "form.update-all-opticians"
+);
 // console.log(updatedOpticianForm);
+console.log(updateAllOpticiansForm);
 
-updatedOpticianForm.forEach((form) => {
+updateOneOpticianForm.forEach((form) => {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -46,4 +49,47 @@ updatedOpticianForm.forEach((form) => {
         }
       });
   });
+});
+
+updateAllOpticiansForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const button = this.querySelector("button.cta");
+
+  // console.log(button);
+
+  const url = `https://youandeyeawards-nodeserver.herokuapp.com/api/v1/addAllOpticians`;
+
+  console.log(url);
+
+  // const url = `http://localhost:3000/api/v1/addAllOpticians`;
+
+  // console.log(url);
+
+  // const requestOptions = {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  // };
+
+  // console.log(this.getAttribute("data-optician-id"));
+  // console.log(this.dataset.opticianId);
+
+  this.closest("main.dashboard").style.opacity = "0.4";
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data);
+
+      if (data.status === "success") {
+        console.log("all opticians updated");
+        button.textContent = "Updated Successfully";
+        this.closest("main.dashboard").style.opacity = "1";
+      } else {
+        button.textContent = "Could Not Update. Contact Admin";
+        this.closest("main.dashboard").style.opacity = "1";
+        this.closest("main.dashboard").style.borderColor = "red";
+        this.closest("main.dashboard").style.borderWidth = "2px";
+      }
+    });
 });

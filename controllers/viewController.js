@@ -5,6 +5,10 @@ viewController.showDashboard = function (req, res, next) {
   res.status(200).render("dashboard");
 };
 
+viewController.showUpdateOpticians = function (req, res, next) {
+  res.status(200).render("update-all-opticians");
+};
+
 viewController.showResults = async function (req, res, next) {
   const category = req.params.category;
   let segment;
