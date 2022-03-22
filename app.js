@@ -54,11 +54,6 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use("/api/v1", apiRouter);
 
-app.use(function (req, res, next) {
-  res.removeHeader("x-content-type-options");
-  next();
-});
-
 app.use("/sbrawiagiwmyt", adminRouter);
 
 // app.use("/", function (req, res) {
