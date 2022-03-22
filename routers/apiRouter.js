@@ -14,7 +14,10 @@ router.get("/addAllOpticians", opticianController.addAllOpticians);
 router.get("/getAllOpticians", opticianController.getAllOpticians);
 router.post("createOneOptician", opticianController.createOneOptician);
 router.get("/getOneOptician/:slug", opticianController.getOneOptician);
-router.put("/updateOneOptician/:slug", opticianController.updateOneOptician);
+router.put(
+  "/updateOneOptician/:opticianId",
+  opticianController.updateOneOptician
+);
 
 // RATING
 router.get("/getAllRatings", ratingController.getAllRatings);

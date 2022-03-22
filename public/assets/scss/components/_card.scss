@@ -3,12 +3,13 @@
   flex-direction: column;
   justify-content: flex-start;
   row-gap: 2rem;
+  padding: 1rem;
 }
 
 .card {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: 1fr 2fr auto;
+  grid-template-rows: auto;
   background: white;
   border: 1px solid gray;
   text-align: center;
@@ -17,19 +18,30 @@
     font-size: 1.6rem;
   }
   h4 {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: gray;
     line-height: 2;
   }
 
+  &__logo {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    overflow: hidden;
+    border-bottom: 1px solid gray;
+    aspect-ratio: 2/1;
+    img {
+      object-fit: contain;
+    }
+  }
+
   &__title {
-    grid-column-start: 1;
-    grid-row-start: 1;
+    grid-column-start: 2;
     grid-column-end: 3;
+    grid-row-start: 1;
     grid-row-end: 2;
     // background-color: red;
     border-bottom: 1px solid gray;
@@ -39,6 +51,7 @@
   }
 
   &__rating {
+    grid-column: 1/3;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr 1fr;
@@ -52,6 +65,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 0.3rem;
     }
     > *:not(:first-child) {
       border: 1px solid gray;
@@ -59,11 +73,17 @@
   }
 
   &__profile {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
-    padding: 2rem 1rem;
+    // padding: 1rem 1rem;
     > * {
       padding: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: gray;
+      line-height: 2;
     }
 
     > *:not(:last-child) {

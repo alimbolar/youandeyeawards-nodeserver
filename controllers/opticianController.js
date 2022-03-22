@@ -129,16 +129,19 @@ opticianController.getOneOptician = async function (req, res) {
 // UPDATE ONE OPTICIAN
 
 opticianController.updateOneOptician = async function (req, res) {
-  const slug = req.params.slug;
+  const opticianId = req.params.opticianId;
 
-  const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&slug=${slug}`;
+  const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&id=${opticianId}`;
 
   const response = await fetch(url);
   const data = await response.json();
 
   const optician = createOpticianObject(data[0]);
 
-  const updatedOptician = await Optician.findOneAndUpdate({ slug }, optician);
+  const updatedOptician = await Optician.findOneAndUpdate(
+    { opticianId },
+    optician
+  );
 
   res.status(200).json({
     status: "success",

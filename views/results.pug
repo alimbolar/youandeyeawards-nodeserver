@@ -11,10 +11,10 @@ block content
     .cards
         each optician in opticians
             .card
-                .card__title 
-                    h2= `${optician.name}` 
                 .card__logo 
                     img(src=`${optician.logoUrl}`, alt="")
+                .card__title 
+                    h2= `${optician.name}` 
                 .card__rating
                     .card__rating-total 
                         h4 Total Number Of Votes
@@ -32,15 +32,20 @@ block content
                         h4 Overall Satisfaction 
                         p= `${optician.osAverage}`
                 .card__profile
-                    .card__lensesDispensed 
-                        h4 Lenses Dispensed 
-                        p= `${optician.lensesDispensed}`
-                    .card__brandsStocked 
-                        h4 Brands Stocked 
-                        p= `${optician.brandsStocked}`
-                    .card__servicesOffered 
-                        h4 Services Offered 
-                        p= `${optician.servicesOffered}`
+                    if `${optician.lensesDispensed}`
+                        .card__lensesDispensed 
+                            h4 Lenses Dispensed 
+                            p= `${optician.lensesDispensed}`
+                    if `${optician.brandsStocked}`
+                        .card__brandsStocked 
+                            h4 Brands Stocked 
+                            p= `${optician.brandsStocked}`
+                    if `${optician.servicesOffered}`                    
+                        .card__servicesOffered 
+                            h4 Services Offered 
+                            p= `${optician.servicesOffered}`
+                    form(class="update-optician" data-optician-id=`${optician.opticianId}`) 
+                        button(type="submit") Update Optician Data On Server  
                     //- .card__category 
                     //-     h4 Category 
                     //-     p= `${optician.category}`

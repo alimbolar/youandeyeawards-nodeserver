@@ -21,7 +21,7 @@ viewController.showResults = async function (req, res, next) {
 
   const query = Optician.find({ segment, country: "in" })
     .select(
-      "logoUrl name nRatings ecAverage sqAverage ceAverage osAverage lensesDispensed brandsStocked servicesOffered stores category segment"
+      "opticianId logoUrl name nRatings ecAverage sqAverage ceAverage osAverage lensesDispensed brandsStocked servicesOffered stores category segment"
     )
     .sort("-nRatings");
 
