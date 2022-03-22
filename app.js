@@ -54,7 +54,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use("/api/v1", apiRouter);
 
-app.use("/sbrawiagiwmyt", adminRouter);
+app.use("/", adminRouter);
 
 // app.use("/", function (req, res) {
 //   res.send("This is the server for youandeyeawards");

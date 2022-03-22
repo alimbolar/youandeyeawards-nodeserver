@@ -6,6 +6,6 @@ const viewController = require("../controllers/viewController");
 
 router.get("/", viewController.showDashboard);
 
-router.get("/:category", viewController.showResults);
+router.get("/results/:category", viewController.showResults);
 
 module.exports = router;
