@@ -13,6 +13,7 @@ opticianController.addAllOpticians = async function (req, res) {
     const query = Optician.find().select("opticianId");
     const opticianIds = await query;
     let opticianIdsArray = opticianIds.map((optician) => optician.opticianId);
+    let total = 0;
 
     // GET JSON FROM WORDPRESS
 
@@ -29,7 +30,7 @@ opticianController.addAllOpticians = async function (req, res) {
       const data = await response.json();
 
       if (response.status === 200) {
-        createOpticiansInMongo(data, opticianIdsArray);
+        total = await createOpticiansInMongo(data, opticianIdsArray, total);
 
         page++;
       } else {
@@ -37,10 +38,11 @@ opticianController.addAllOpticians = async function (req, res) {
       }
     }
 
+    console.log("total opticians added", total);
     res.status(200).json({
       status: "success",
 
-      data: "Opticians Added To Mongo DB",
+      data: `${total} opticians Added To Mongo DB`,
     });
   } catch (error) {
     res.status(400).json({
@@ -192,74 +194,83 @@ const checkForMetro = function (branch) {
 
 // FUNCTION FOR USE IN ADD ALL OPTICIAN BEFORE GO LIVE
 
-const createOpticiansInMongo = async function (data, opticianIdsArray) {
+const createOpticiansInMongo = async function (data, opticianIdsArray, total) {
+  let count = 0;
   data.forEach((item) => {
-    const opticianId = item.id;
-    const slug = item.slug;
-    const name = item.title.rendered;
-    const profile = item.content.rendered;
-    const logoUrl =
-      item["toolset-meta"]["organisation-details"]["organisation-logo"].raw;
-    const phone =
-      item["toolset-meta"]["organisation-details"]["organisation-phone"].raw;
-    const email =
-      item["toolset-meta"]["organisation-details"]["organisation-email"].raw;
-    const headOffice =
-      item["toolset-meta"]["organisation-details"]["head-office"].raw;
-    const branches =
-      item["toolset-meta"]["organisation-details"]["branch-office"].raw;
-
-    const stores = branches.length;
-
-    const category =
-      branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
-
-    let segment = "";
-    if (+branches.length <= 5) {
-      segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
-    }
-
-    const yearOfIncorporation =
-      item["toolset-meta"]["optician-details"]["year-of-incorporation"].raw;
-
-    const lensesDispensed =
-      item["toolset-meta"]["optician-details"]["lenses-dispensed"].raw;
-    const brandsStocked =
-      item["toolset-meta"]["optician-details"]["brands-stocked"].raw;
-    const servicesOffered =
-      item["toolset-meta"]["optician-details"]["services-offered"].raw;
-    const storeImages =
-      item["toolset-meta"]["optician-details"]["optician-store-image"].raw;
-    const bannerImages =
-      item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
-    const country =
-      item["toolset-meta"]["optician-details"]["optician-store"].raw;
-    const opticianObject = {
-      opticianId,
-      slug,
-      name,
-      profile,
-      logoUrl,
-      phone,
-      email,
-      headOffice,
-      branches,
-      stores,
-      category,
-      segment,
-      yearOfIncorporation,
-      lensesDispensed,
-      brandsStocked,
-      servicesOffered,
-      storeImages,
-      bannerImages,
-      country,
-    };
-
+    // Check IF optician does not exist in Mongo DB
     if (!opticianIdsArray.includes(item.id.toString())) {
+      const opticianId = item.id;
+      const slug = item.slug;
+      const name = item.title.rendered;
+      const profile = item.content.rendered;
+      const logoUrl =
+        item["toolset-meta"]["organisation-details"]["organisation-logo"].raw;
+      const phone =
+        item["toolset-meta"]["organisation-details"]["organisation-phone"].raw;
+      const email =
+        item["toolset-meta"]["organisation-details"]["organisation-email"].raw;
+      const headOffice =
+        item["toolset-meta"]["organisation-details"]["head-office"].raw;
+      const branches =
+        item["toolset-meta"]["organisation-details"]["branch-office"].raw;
+
+      const stores = branches.length;
+
+      const category =
+        branches && +branches.length >= 5 ? "Retail Chain" : "Boutique Stores";
+
+      let segment = "";
+      if (+branches.length <= 5) {
+        segment = branches.some(checkForMetro) ? "Metro" : "Non-Metro";
+      }
+
+      const yearOfIncorporation =
+        item["toolset-meta"]["optician-details"]["year-of-incorporation"].raw;
+
+      const lensesDispensed =
+        item["toolset-meta"]["optician-details"]["lenses-dispensed"].raw;
+      const brandsStocked =
+        item["toolset-meta"]["optician-details"]["brands-stocked"].raw;
+      const servicesOffered =
+        item["toolset-meta"]["optician-details"]["services-offered"].raw;
+      const storeImages =
+        item["toolset-meta"]["optician-details"]["optician-store-image"].raw;
+      const bannerImages =
+        item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
+      const country =
+        item["toolset-meta"]["optician-details"]["optician-store"].raw;
+      const opticianObject = {
+        opticianId,
+        slug,
+        name,
+        profile,
+        logoUrl,
+        phone,
+        email,
+        headOffice,
+        branches,
+        stores,
+        category,
+        segment,
+        yearOfIncorporation,
+        lensesDispensed,
+        brandsStocked,
+        servicesOffered,
+        storeImages,
+        bannerImages,
+        country,
+      };
+
       Optician.create(opticianObject);
-    }
+      count++;
+    } // End of IF condition to check if does not optician exist in Mongo
   });
+
+  total += count;
+
+  console.log(`${total} opticians added`);
+
+  return total;
 };
 
 // FUNCTION TO UPDATE OPTICIAN OBJECT
