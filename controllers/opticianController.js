@@ -38,7 +38,8 @@ opticianController.addAllOpticians = async function (req, res) {
       }
     }
 
-    console.log("total opticians added", total);
+    // console.log("total opticians added", total);
+
     res.status(200).json({
       status: "success",
       message: `${total} opticians Added`,
@@ -46,7 +47,7 @@ opticianController.addAllOpticians = async function (req, res) {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      data: error.message,
+      message: error.message,
     });
   }
 };
@@ -267,7 +268,7 @@ const createOpticiansInMongo = async function (data, opticianIdsArray, total) {
 
   total += count;
 
-  console.log(`${total} opticians added`);
+  // console.log(`${total} opticians added`);
 
   return total;
 };
