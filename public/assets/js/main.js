@@ -83,7 +83,7 @@ updateAllOpticiansForm.addEventListener("submit", function (e) {
 
       if (data.status === "success") {
         console.log("all opticians updated");
-        button.textContent = "Updated Successfully";
+        button.textContent = data.message;
         this.closest("main.dashboard").style.opacity = "1";
       } else {
         button.textContent = "Could Not Update. Contact Admin";

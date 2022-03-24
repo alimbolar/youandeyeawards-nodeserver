@@ -41,8 +41,7 @@ opticianController.addAllOpticians = async function (req, res) {
     console.log("total opticians added", total);
     res.status(200).json({
       status: "success",
-
-      data: `${total} opticians Added To Mongo DB`,
+      message: `${total} opticians Added`,
     });
   } catch (error) {
     res.status(400).json({
