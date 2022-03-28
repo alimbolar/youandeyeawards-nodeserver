@@ -12,7 +12,11 @@ ratingController.getAllRatings = async function (req, res) {
 
 ratingController.createOneRating = async function (req, res) {
   console.log(req.body);
+  req.body.userIp = req.headers["x-forwarded-for"];
+  // console.log(req.body);
+
   const rating = await Rating.create(req.body);
+
   // const rating = new OpticianRating(req.body);
   // await rating.save();
 

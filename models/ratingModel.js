@@ -60,6 +60,9 @@ const ratingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  userIp: {
+    type: String,
+  },
 });
 
 ratingSchema.statics.calcAverageRating = async function (opticianId) {
