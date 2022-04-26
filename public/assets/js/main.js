@@ -13,7 +13,7 @@ updateOneOpticianForm.forEach((form) => {
 
     // console.log(button);
 
-    const url = `https://youandeyeawards-nodeserver.herokuapp.com/api/v1/updateOneOptician/${this.dataset.opticianId}`;
+    const url = `/api/v1/updateOneOptician/${this.dataset.opticianId}`;
 
     console.log(url);
 
