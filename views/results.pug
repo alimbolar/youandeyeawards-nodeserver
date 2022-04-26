@@ -23,16 +23,16 @@ block content
                         p= `${optician.nRatings}`
                     .card__rating-ec
                         h4 Eyewear Collection
-                        p= `${optician.ecAverage}`
+                        p= `${optician.ecAverage.toFixed(2)}`
                     .card__rating-sq
                         h4 Service Quality 
-                        p= `${optician.sqAverage}`
+                        p= `${optician.sqAverage.toFixed(2)}`
                     .card__rating-ce
                         h4 Clinical Expertise 
-                        p= `${optician.ceAverage}` 
+                        p= `${optician.ceAverage.toFixed(2)}` 
                     .card__rating-os 
                         h4 Overall Satisfaction 
-                        p= `${optician.osAverage}`
+                        p= `${optician.osAverage.toFixed(2)}`
                 .card__profile
                     if `${optician.lensesDispensed}`
                         .card__lensesDispensed 
