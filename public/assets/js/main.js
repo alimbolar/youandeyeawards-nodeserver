@@ -13,7 +13,7 @@ updateOneOpticianForm.forEach((form) => {
 
     // console.log(button);
 
-    const url = `/api/v1/updateOneOptician/${this.dataset.opticianId}`;
+    const url = `https://youandeyeawards.cyclic.app/api/v1/updateOneOptician/${this.dataset.opticianId}`;
 
     console.log(url);
 
@@ -58,7 +58,11 @@ updateAllOpticiansForm.addEventListener("submit", function (e) {
 
   // console.log(button);
 
-  const url = `https://youandeyeawards-nodeserver.herokuapp.com/api/v1/addAllOpticians`;
+  // HEROKU API
+  // const url = `https://youandeyeawards-nodeserver.herokuapp.com/api/v1/addAllOpticians`;
+
+  // CYCLIC API
+  const url = `https://youandeyeawards.cyclic.app/api/v1/addAllOpticians`;
 
   console.log(url);
 
@@ -86,6 +90,8 @@ updateAllOpticiansForm.addEventListener("submit", function (e) {
         button.textContent = data.message;
         this.closest("main.dashboard").style.opacity = "1";
       } else {
+        console.log(data.message);
+        console.log(data.error);
         button.textContent = "Could Not Update. Contact Admin";
         this.closest("main.dashboard").style.opacity = "1";
         this.closest("main.dashboard").style.borderColor = "red";

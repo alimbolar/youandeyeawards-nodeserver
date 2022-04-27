@@ -45,9 +45,11 @@ opticianController.addAllOpticians = async function (req, res) {
       message: `${total} opticians Added`,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       status: "fail",
       message: error.message,
+      error,
     });
   }
 };
