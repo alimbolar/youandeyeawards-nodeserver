@@ -62,7 +62,7 @@ updateAllOpticiansForm.addEventListener("submit", function (e) {
   // const url = `https://youandeyeawards-nodeserver.herokuapp.com/api/v1/addAllOpticians`;
 
   // CYCLIC API
-  const url = `https://youandeyeawards.cyclic.app/api/v1/addAllOpticians`;
+  const url = `/api/v1/addAllOpticians`;
 
   console.log(url);
 
@@ -97,5 +97,6 @@ updateAllOpticiansForm.addEventListener("submit", function (e) {
         this.closest("main.dashboard").style.borderColor = "red";
         this.closest("main.dashboard").style.borderWidth = "2px";
       }
-    });
+    })
+    .catch((error) => console.log(error.message));
 });

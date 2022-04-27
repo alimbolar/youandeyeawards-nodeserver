@@ -8,7 +8,7 @@ const opticianController = require("../controllers/opticianController");
 // router.get("/message", messageController.saveMessage);
 
 // ALL OPTICIANS BEFORE GO LIVE
-// router.get("/addAllOpticians", opticianController.addAllOpticians);
+router.get("/addAllOpticians", opticianController.addAllOpticians);
 
 // OPTICIANS
 router.get("/getAllOpticians", opticianController.getAllOpticians);

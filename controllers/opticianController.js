@@ -13,6 +13,8 @@ opticianController.addAllOpticians = async function (req, res) {
     const query = Optician.find().select("opticianId");
     const opticianIds = await query;
     let opticianIdsArray = opticianIds.map((optician) => optician.opticianId);
+
+    // console.log(opticianIdsArray);
     let total = 0;
 
     // GET JSON FROM WORDPRESS

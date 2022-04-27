@@ -28,7 +28,8 @@ const opticianSchema = new mongoose.Schema({
   },
   logoUrl: {
     type: String,
-    required: [true, "Logo URL is required"],
+    default:
+      "https://youandeyemag.com/wp-content/uploads/sites/4/2020/08/ye-placeholder-logo-for-opticians.jpg",
   },
   headOffice: {
     type: String,
