@@ -1,5 +1,7 @@
 const opticianController = {};
-const Optician = require("../models/opticianModel");
+// const Optician = require("../../models/ae/opticianModel");
+const Optician = require("./../../models/ae/opticianModel");
+
 const fetch = require("node-fetch");
 
 // FUNCTION TO ADD ALL OPTICIANS BEFORE GO LIVE
@@ -7,19 +9,21 @@ const fetch = require("node-fetch");
 // let opticianIdArray = [];
 
 opticianController.addAllOpticians = async function (req, res) {
+
   try {
     // CREATE AN ARRAY OF IDS BASED ON EXISTING OPTICIANS IN DATABASE
 
-    const query = Optician.find().select("opticianId");
+    const query = Optician.find();
+    // console.log('query',query);
     const opticianIds = await query;
-    let opticianIdsArray = opticianIds.map((optician) => optician.opticianId);
+    let opticianIdsArray = opticianIds.map(optician => optician.opticianId);
 
-    // console.log(opticianIdsArray);
+    // console.log('existing opticians',opticianIdsArray);
     let total = 0;
 
     // GET JSON FROM WORDPRESS
 
-    const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=50&page=`;
+    const url = `https://youandeyemag.com/wp-json/wp/v2/optician?_embed&_fields=id,slug,toolset-meta.organisation-details,toolset-meta.optician-details,content.rendered,title.rendered&per_page=50&page=`;
 
     let page = "1";
     let status = true;
@@ -54,6 +58,8 @@ opticianController.addAllOpticians = async function (req, res) {
       error,
     });
   }
+
+
 };
 
 // GET ALL OPTICIANS (PENDING : SORT AND FILTER)
@@ -200,9 +206,10 @@ const checkForMetro = function (branch) {
 
 const createOpticiansInMongo = async function (data, opticianIdsArray, total) {
   let count = 0;
+  // console.log('in create',data);
   data.forEach((item) => {
     // Check IF optician does not exist in Mongo DB
-    if (!opticianIdsArray.includes(item.id.toString())) {
+    if (!opticianIdsArray.includes(item.id.toString()) && item["toolset-meta"]["optician-details"]["optician-store"].raw ==="global") {
       const opticianId = item.id;
       const slug = item.slug;
       const name = item.title.rendered;
@@ -243,6 +250,11 @@ const createOpticiansInMongo = async function (data, opticianIdsArray, total) {
         item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
       const country =
         item["toolset-meta"]["optician-details"]["optician-store"].raw;
+// ADDED FOR YE ARABIA
+const website = item["toolset-meta"]["optician-details"]["website"].raw;
+const promotionVideo = item["toolset-meta"]["optician-details"]["promotion-video"].raw;
+const mainImage = item["toolset-meta"]["optician-details"]["optician-main-image"].raw;
+
       const opticianObject = {
         opticianId,
         slug,
@@ -263,10 +275,17 @@ const createOpticiansInMongo = async function (data, opticianIdsArray, total) {
         storeImages,
         bannerImages,
         country,
+        website,
+        promotionVideo,
+        mainImage
       };
+
+      console.log('country',opticianObject.country)
 
       Optician.create(opticianObject);
       count++;
+      
+
     } // End of IF condition to check if does not optician exist in Mongo
   });
 
@@ -320,6 +339,15 @@ const updateOpticianObject = function (item) {
     item["toolset-meta"]["organisation-details"]["organisation-banner"].raw;
   const country =
     item["toolset-meta"]["optician-details"]["optician-store"].raw;
+
+    // Added for You&Eye Awards Arabia 
+    const website =
+    item["toolset-meta"]["optician-details"]["website"].raw;
+    const promotionVideo =
+    item["toolset-meta"]["optician-details"]["promotion-video"].raw;
+
+    // const youandeyeawardsGlobalOpticiansAwards = item["toolset-meta"]["optician-details"]["event-participation"].includes('youandeye-global-opticians-awards') ? true : false;
+
   return {
     // opticianId,
     slug,

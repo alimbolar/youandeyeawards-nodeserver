@@ -111,6 +111,6 @@ ratingSchema.post(/^findOneAnd/, async function () {
   this.r.controller.calcAverageRating(this.r.opticianId);
 });
 
-const Rating = mongoose.model("Rating", ratingSchema);
+const Rating = mongoose.model("AERating", ratingSchema);
 
 module.exports = Rating;

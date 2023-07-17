@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: `${__dirname}/.env` });
 
-const DB = process.env.DATABASE.replace(
+const DB = process.env.AE_DATABASE.replace(
   `{%PASSWORD%}`,
   process.env.DATABASE_PASSWORD
 );

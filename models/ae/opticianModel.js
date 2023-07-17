@@ -41,6 +41,12 @@ const opticianSchema = new mongoose.Schema({
   yearOfIncorporation: {
     type: String,
   },
+  website: {
+    type: String,
+  },
+  promotionVideo: {
+    type: String,
+  },
   lensesDispensed: {
     type: String,
   },
@@ -55,6 +61,9 @@ const opticianSchema = new mongoose.Schema({
   },
   country: {
     type: String,
+  },
+  mainImage:{
+    type:String,
   },
   storeImages: {
     type: Array,
@@ -101,6 +110,6 @@ const opticianSchema = new mongoose.Schema({
 
 opticianSchema.index({ category: 1, segment: 1 });
 
-const Optician = mongoose.model("optician", opticianSchema);
+const AEOptician = mongoose.model("AEOptician", opticianSchema);
 
-module.exports = Optician;
+module.exports = AEOptician;

@@ -31,6 +31,10 @@ app.use(cors());
 
 const apiRouter = require("./routers/apiRouter");
 const adminRouter = require("./routers/adminRouter");
+const aeApiRouter = require("./routers/ae/apiRouter");
+const aeAdminRouter = require("./routers/ae/adminRouter");
+
+
 
 // Development logging
 if (process.env.NODE_ENV === "development") {
@@ -52,9 +56,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
+// Routes for India Edition (in)
 app.use("/api/v1", apiRouter);
-
 app.use("/", adminRouter);
+
+// Routes for Arabia Edition (ae)
+app.use("/api/v1/ae", aeApiRouter);
+app.use("/admin/ae", aeAdminRouter);
 
 // app.use("/", function (req, res) {
 //   res.send("This is the server for youandeyeawards");

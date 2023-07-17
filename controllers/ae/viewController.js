@@ -1,5 +1,5 @@
 const viewController = {};
-const Optician = require("./../models/opticianModel");
+const Optician = require("./../../models/ae/opticianModel");
 
 viewController.showDashboard = function (req, res, next) {
   res.status(200).render("dashboard");

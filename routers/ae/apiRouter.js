@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 // const messageController = require("../controllers/messageController");
-const ratingController = require("../controllers/ratingController");
-const opticianController = require("../controllers/opticianController");
+const ratingController = require("../../controllers/ae/ratingController");
+const opticianController = require("../../controllers/ae/opticianController");
 
 // router.get("/message", messageController.saveMessage);
 
